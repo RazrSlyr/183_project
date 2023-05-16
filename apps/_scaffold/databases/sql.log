@@ -1,7 +1,16 @@
-timestamp: 2023-05-08T11:45:17.675102
+timestamp: 2023-05-16T15:52:13.714814
+CREATE TABLE "py4web_session"(
+    "id" INTEGER PRIMARY KEY AUTOINCREMENT,
+    "rkey" CHAR(512),
+    "rvalue" TEXT,
+    "expiration" INTEGER,
+    "created_on" TIMESTAMP,
+    "expires_on" TIMESTAMP
+);
+success!
+timestamp: 2023-05-16T15:52:13.720849
 CREATE TABLE "auth_user"(
     "id" INTEGER PRIMARY KEY AUTOINCREMENT,
-    "username" CHAR(512) UNIQUE,
     "email" CHAR(512) UNIQUE,
     "password" CHAR(512),
     "first_name" CHAR(512),
@@ -12,7 +21,7 @@ CREATE TABLE "auth_user"(
     "past_passwords_hash" TEXT
 );
 success!
-timestamp: 2023-05-08T11:45:17.682909
+timestamp: 2023-05-16T15:52:13.723814
 CREATE TABLE "auth_user_tag_groups"(
     "id" INTEGER PRIMARY KEY AUTOINCREMENT,
     "tagpath" CHAR(512),
