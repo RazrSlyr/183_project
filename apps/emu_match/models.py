@@ -26,4 +26,7 @@ db.define_table("matchmaking",
                 Field("uid", "reference auth_user", default=get_user_id),
                 Field("group_num", "integer", default=-1))
 
+
+## Chat DB
+
 db.commit()
