@@ -28,3 +28,12 @@ CREATE TABLE "auth_user_tag_groups"(
     "record_id" INTEGER REFERENCES "auth_user" ("id") ON DELETE CASCADE ON UPDATE CASCADE  
 );
 success!
+timestamp: 2023-05-30T21:21:39.523379
+CREATE TABLE "py4web_session"(
+    "id" INTEGER PRIMARY KEY AUTOINCREMENT,
+    "rkey" CHAR(512),
+    "rvalue" TEXT,
+    "expiration" INTEGER,
+    "created_on" TIMESTAMP,
+    "expires_on" TIMESTAMP
+);

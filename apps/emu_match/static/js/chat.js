@@ -12,19 +12,53 @@ let init = (app) => {
     // This is the Vue data.
     app.data = {
         // Complete as you see fit.
+        chat_list: [],
+        new_chat: "",
     };
 
     app.enumerate = (a) => {
         // This adds an _idx field to each element of the array.
         let k = 0;
-        a.map((e) => {e._idx = k++;});
+        a.map((e) => { e._idx = k++; });
         return a;
     };
+
+    app.update_chat = function () {
+        app.checkInterval = setInterval(app.get_chat, 1000);
+    }
+
+    app.get_chat = function () {
+        axios.get(get_chat_url).then((response) => {
+            //chat_list = response.data;
+            app.vue.chat_list = [];            
+                response.data.chats.forEach(element => {
+                    console.log(element.email, element.time, element.chat);
+                    // app.vue.chat_list.push(element.chat);
+                    app.vue.chat_list.push({
+                        email: element.email,
+                        time: element.time,
+                        chat: element.chat,
+                    });
+                });            
+        });
+    }
+
+    app.add_chat = function (chat) {
+        axios.post(add_chat_url, {
+            chat: chat,
+        }).then(function (response) {
+            // console.log(response.data);
+        });
+
+        app.vue.chat_list.push(chat);
+        app.vue.new_chat = "";
+    }
 
 
     // This contains all the methods.
     app.methods = {
         // Complete as you see fit.
+        add_chat: app.add_chat,
     };
 
     // This creates the Vue instance.
@@ -38,6 +72,7 @@ let init = (app) => {
     app.init = () => {
         // Put here any initialization code.
         // Typically this is a server GET call to load the data.
+        app.update_chat();
     };
 
     // Call to the initializer.
