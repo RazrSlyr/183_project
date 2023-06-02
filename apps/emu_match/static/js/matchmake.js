@@ -16,7 +16,7 @@ let init = (app) => {
     app.check_interval = null;
 
     app.join_queue = function () {
-        axios.get(queue_url).then((reponse) => {
+        axios.get(queue_url).then((response) => {
             app.in_queue = true;
             // Start Looking for match
             app.checkInterval = setInterval(app.check_match, 1000);
@@ -25,6 +25,7 @@ let init = (app) => {
 
     // check for a match
     app.check_match = function () {
+        console.log("hello");
         if (app.vue.match !== null) return;
         axios.get(check_url).then((response) => {
             // Check response data
