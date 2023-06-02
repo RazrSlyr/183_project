@@ -5,3 +5,61 @@
     <button class="button is-primary">Find Match</button>
   </a>
 </div>
+
+
+<section class="hero is-dark">
+  <div class="hero-body" style="background-image: 
+  url('https://images4.alphacoders.com/121/1216476.jpg'); 
+  background-size:100%;
+  background-attachment: fixed;">
+
+    <div class="container">
+      <div class="notification is-dark">
+        <p style="font-size:120px;margin-bottom:-60px">
+
+          <strong>Emu</strong>
+          
+        </p>
+
+        <p style="font-size:120px;margin-left:50px;margin-bottom:30px">
+          <strong>Match</strong>
+        </p>
+
+        <p style="font-size:30px;margin-left:100px;">
+          Online Matchmaking for All
+        </p>
+        
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="hero" style="background-color: #484848;">
+  <div class="hero-body">
+    <div class="container">
+      <p class="has-text-white">
+        Thanks to stuff like emulators there are a lot of games people play that have online play but only through private room codes. This means there's no matchmaking and it'll be hard to find others to play with. The idea is that this website solves this, allowing people to "queue up" for these games and find others trying to play, then providing some kind of chat space to share room codes if needed. It's sort of like smashladder.com if your familiar with that but for any game. There are two main parts to the project. 
+
+First is the actual matchmaking. Users, after signing up, can go to the "Games" section and queue up for a game. Here they will be taken to a waiting screen until a match is made. From there, users will be taken to a chatroom where they can discuss everything needed to get the match started. 
+
+Second is the community feature. Users can both sign up for communities for games that they are interested in to discuss whatever they'd like as well as make communities for games that are not already on the site, allowing for both matchmaking and community building.
+      </p>
+    </div>
+  </div>
+</section>
+
+<section class="hero is-dark">
+  <div class="hero-body">
+    <p class="title has-text-centered has-text-warning">
+      <a href="[[=URL('rooms')]]">Let's join the game</a>
+    </p>
+    
+  </div>
+</section>
+
+[[block page_scripts]]
+<!-- Loads the index-specific js for Vue -->
+
+<script src="js/index.js"></script>
+[[end]]
+

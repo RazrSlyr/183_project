@@ -6,15 +6,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="shortcut icon" href="data:image/x-icon;base64,AAABAAEAAQEAAAEAIAAwAAAAFgAAACgAAAABAAAAAgAAAAEAIAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAPAAAAAA=="/>
     <link rel="stylesheet" href="css/bulma.css">
+    <link rel="stylesheet" href="css/meow.css">
     <link rel="stylesheet" href="font-awesome-4.7.0/css/font-awesome.css">
     [[block page_head]]<!-- individual pages can customize header here -->[[end]]
   </head>
   <body>
     <!-- Navigation bar -->
-    <nav class="navbar is-dark" role="navigation" aria-label="main navigation">
+    <nav class="navbar" role="navigation" aria-label="main navigation" style="background-color:#461E79;">
       <div class="navbar-brand">
-        <a class="navbar-item" href="[[=URL('index')]]">
-          Learn py4web
+        <a class="navbar-item has-text-light" href="[[=URL('index')]]">
+          <img src="EmuLogo1.jpg" alt="Logo" width="50" height="50">
+          
           <!-- <img class="logo" width="150" src="images/site_icon.png"> -->
         </a>
 
@@ -34,11 +36,16 @@
 
         <div class="navbar-end">
           <div class="navbar-item">
+
+            <button class="button is-primary">
+              Games
+            </button>
+
             <div class="buttons">
               [[if globals().get('user'):]]
                 <div class="navbar-item has-dropdown is-hoverable">
-                  <a class="navbar-link is-primary">
-                    [[=globals().get('user').get('email')]]
+                  <a class="navbar-link is-primary has-text-light">
+                    [[=globals().get('user').get('username')]]
                   </a>
                   <div class="navbar-dropdown">
                     <a class="navbar-item" href="[[=URL('auth/logout')]]">Logout</a>
