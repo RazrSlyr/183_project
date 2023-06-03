@@ -37,15 +37,15 @@
         <div class="navbar-end">
           <div class="navbar-item">
 
-            <button class="button is-primary">
+            <a class="button is-primary" href="[[=URL('games')]]">
               Games
-            </button>
+            </a>
 
             <div class="buttons">
               [[if globals().get('user'):]]
                 <div class="navbar-item has-dropdown is-hoverable">
                   <a class="navbar-link is-primary has-text-light">
-                    [[=globals().get('user').get('username')]]
+                    [[=globals().get('user').get('email')]]
                   </a>
                   <div class="navbar-dropdown">
                     <a class="navbar-item" href="[[=URL('auth/logout')]]">Logout</a>

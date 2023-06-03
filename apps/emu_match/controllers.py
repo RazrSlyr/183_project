@@ -30,11 +30,12 @@ from yatl.helpers import A
 from .common import db, session, T, cache, auth, logger, authenticated, unauthenticated, flash
 from py4web.utils.url_signer import URLSigner
 from .models import get_user_id
+from py4web.utils.form import Form, FormStyleBulma
 
 url_signer = URLSigner(session)
 
 @action("index")
-@action.uses("index.html", auth.user, T, url_signer)
+@action.uses("index.html", auth, T, url_signer)
 def index():
     # Put the index code here
     matchmake_url = URL("matchmaking", signer=url_signer)
@@ -46,26 +47,27 @@ def chat():
     # Put the code for the chat page here
     return dict()
 
-@action("matchmaking")
-@action.uses("matchmaking.html", url_signer.verify()) 
-def matchmaking():
+@action("matchmaking/<game_id:int>")
+@action.uses("matchmaking.html", auth.user, url_signer.verify()) 
+def matchmaking(game_id):
     # Put the code for the matchmaking page here
+    print(game_id)
     return dict(queue_url=URL("join_queue", signer=url_signer),
                 check_url=URL("check_match", signer=url_signer))
 
 @action("join_queue")
 @action.uses(url_signer.verify())
 def join_queue():
-    # check if already in queue
+    # RV: check if already in queue
     queue_entry = db(db.matchmaking["uid"] == get_user_id()).select().as_list()
     if (len(queue_entry) > 0):
-        # Already in requeue
+        # RV: Already in requeue
         return "ALREADY IN QUEUE"
-    # Else, add to queue
+    # RV: Else, add to queue
     db.matchmaking.insert(uid=get_user_id())
-    # regrab queue entry
+    # RV: regrab queue entry
     queue_entry = db(db.matchmaking["uid"] == get_user_id()).select().as_list()[0]
-    # set "group_num" status
+    # RV: set "group_num" status
     id = queue_entry["id"]
     db.matchmaking[id] = dict(group_num=((id-1) // 2))
     return "OK"
@@ -73,16 +75,33 @@ def join_queue():
 @action("check_match")
 @action.uses(url_signer.verify())
 def check_match():
-    # check for user with same group_num
+    # RV: check for user with same group_num
     group_num = db(db.matchmaking["uid"] == get_user_id()).select().as_list()[0]["group_num"]
     matches = db(db.matchmaking["group_num"] == group_num).select().as_list()
-    # check if a match was found
+    # RV: check if a match was found
     if (len(matches) == 1):
         return dict(found=False)
-    # grab user that isn't current user
+    # RV: grab user that isn't current user
     match = None
     for m in matches:
         if m["uid"] is not get_user_id():
             match = db.auth_user[m["uid"]]
     return dict(found=True, match=match["email"])
+
+@action("games")
+@action.uses("games.html", auth.user, url_signer)
+def games():
+    # RV: Defines games page
+    games = db(db.games).select().as_list()
+    print(games)
+    return dict(games=games, url_signer=url_signer)
     
+@action("add_game", method=["GET", "POST"])
+@action.uses("add_game.html", auth.user, url_signer.verify())
+def add_game():
+    # RV: Defines form for adding new games
+    form = Form(db.games, formstyle=FormStyleBulma)
+    if form.accepted:
+        redirect(URL("games"))
+    return dict(form=form)
+

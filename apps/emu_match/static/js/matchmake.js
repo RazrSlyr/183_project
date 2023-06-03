@@ -18,17 +18,17 @@ let init = (app) => {
     app.join_queue = function () {
         axios.get(queue_url).then((response) => {
             app.in_queue = true;
-            // Start Looking for match
+            // RV: Start Looking for match
             app.checkInterval = setInterval(app.check_match, 1000);
         });
     }
 
-    // check for a match
+    // RV: check for a match
     app.check_match = function () {
         console.log("hello");
         if (app.vue.match !== null) return;
         axios.get(check_url).then((response) => {
-            // Check response data
+            // RV: Check response data
             let data = response.data;
             if (data["found"]) {
                 app.vue.match = data["match"];
