@@ -31,8 +31,9 @@ let init = (app) => {
             // RV: Check response data
             let data = response.data;
             if (data["found"]) {
-                app.vue.match = data["match"];
                 clearInterval(app.checkInterval);
+                // RV: Goes to lobby
+                document.location.href = data["url"];
             }
         });
     }

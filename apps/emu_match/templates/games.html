@@ -1,0 +1,27 @@
+[[extend 'layout.html']]
+
+<div class="section">
+  <h1 class="title">Games</h1>
+
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Game Name</th>
+        <th>Platform</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      [[for game in games:]]
+      <td>[[=game["name"]]]</td>
+      <td>[[=game["platform"]]]</td>
+      <td><a class="button is-success" href="[[=URL('matchmaking', game['id'], signer=url_signer)]]">Join Queue</a></td>
+      [[pass]]
+    </tbody>
+  </table>
+  <div>
+    <p>Don't see the game you want? Add it here!</p>
+    <a class="button is-primary" href="[[=URL('add_game', signer=url_signer)]]"
+      >Add Game</a>
+  </div>
+</div>
