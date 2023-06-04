@@ -3,3 +3,5 @@ apps/__pycache__
 apps/*/__pycache__
 
 apps/.service
+*.storage
+apps/__pycache__/__init__.cpython-311.pyc

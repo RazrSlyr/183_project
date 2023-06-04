@@ -41,7 +41,7 @@ def index():
     # Put the index code here
     matchmake_url = URL("matchmaking", signer=url_signer)
     chat_url = URL("chat", signer=url_signer)
-    return dict(matchmake_url=matchmake_url, chat_url=chat_url)
+    return dict(matchmake_url=matchmake_url, chat_url=chat_url, url_signer=url_signer)
 
 
 @action("chat")
@@ -52,14 +52,14 @@ def chat():
     return dict(get_chat_url=get_chat_url, add_chat_url=add_chat_url)
 
 @action("get_chat", method="GET")
-@action.uses(url_signer.verify(), db, auth.user) 
-def chat():     
+@action.uses(db, auth.user, url_signer.verify()) 
+def get_chat():     
     chats = db(db.chat.user != -1).select().as_list()  # change this?
     return dict(chats=chats)
 
 @action("add_chat", method="POST")
-@action.uses(url_signer.verify(), db, auth.user) 
-def chat():
+@action.uses(db, auth.user, url_signer.verify()) 
+def add_chat():
     chat = request.params.get("chat")
     if chat == "":
         return "Error"
