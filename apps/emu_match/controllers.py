@@ -35,8 +35,7 @@ url_signer = URLSigner(session)
 
 @action("index")
 @action.uses("index.html", auth.user, T, url_signer)
-def index():
-    # Put the index code here
+def index():    
     matchmake_url = URL("matchmaking", signer=url_signer)
     chat_url = URL("chat", signer=url_signer)
     return dict(matchmake_url=matchmake_url, chat_url=chat_url)
@@ -44,6 +43,7 @@ def index():
 @action("chat")
 @action.uses("chat.html", url_signer.verify()) 
 def chat(): 
+    # define chat urls
     get_chat_url = URL("get_chat", signer=url_signer)
     add_chat_url = URL("add_chat", signer=url_signer)
     return dict(get_chat_url=get_chat_url, add_chat_url=add_chat_url)
@@ -51,6 +51,7 @@ def chat():
 @action("get_chat", method="GET")
 @action.uses(url_signer.verify(), db, auth.user) 
 def chat():     
+    # get chat
     chats = db(db.chat.user != -1).select().as_list()  # change this?
     return dict(chats=chats)
 
@@ -61,6 +62,7 @@ def chat():
     if chat == "":
         return "Error"
     else:
+        # add chat
         db.chat.insert(user=get_user_id(), email=get_user_email(), time=get_time(), chat=chat)
         return "ok"
 

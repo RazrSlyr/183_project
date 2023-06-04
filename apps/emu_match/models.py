@@ -15,12 +15,6 @@ def get_user_id():
 def get_time():
     return datetime.datetime.utcnow()
 
-
-### Define your table below
-#
-# db.define_table('thing', Field('name'))
-#
-## always commit your models to avoid problems later
 db.define_table("matchmaking",
                 Field("uid", "reference auth_user", default=get_user_id),
                 Field("group_num", "integer", default=-1))
