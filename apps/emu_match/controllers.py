@@ -29,7 +29,7 @@ from py4web import action, request, abort, redirect, URL
 from yatl.helpers import A
 from .common import db, session, T, cache, auth, logger, authenticated, unauthenticated, flash
 from py4web.utils.url_signer import URLSigner
-from .models import get_user_id
+from .models import get_user_id, get_time, get_user_email
 from py4web.utils.form import Form, FormStyleBulma
 
 url_signer = URLSigner(session)
@@ -40,14 +40,33 @@ url_signer = URLSigner(session)
 def index():
     # Put the index code here
     matchmake_url = URL("matchmaking", signer=url_signer)
-    return dict(matchmake_url=matchmake_url)
+    chat_url = URL("chat", signer=url_signer)
+    return dict(matchmake_url=matchmake_url, chat_url=chat_url)
 
 
 @action("chat")
-# @action.uses("chat") Uncomment this when the chat template page is made
+@action.uses("chat.html", url_signer.verify()) 
+def chat(): 
+    get_chat_url = URL("get_chat", signer=url_signer)
+    add_chat_url = URL("add_chat", signer=url_signer)
+    return dict(get_chat_url=get_chat_url, add_chat_url=add_chat_url)
+
+@action("get_chat", method="GET")
+@action.uses(url_signer.verify(), db, auth.user) 
+def chat():     
+    chats = db(db.chat.user != -1).select().as_list()  # change this?
+    return dict(chats=chats)
+
+@action("add_chat", method="POST")
+@action.uses(url_signer.verify(), db, auth.user) 
 def chat():
-    # Put the code for the chat page here
-    return dict()
+    chat = request.params.get("chat")
+    if chat == "":
+        return "Error"
+    else:
+        db.chat.insert(user=get_user_id(), email=get_user_email(), time=get_time(), chat=chat)
+        return "ok"
+
 
 
 @action("matchmaking/<game_id:int>")

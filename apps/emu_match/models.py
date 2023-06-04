@@ -6,7 +6,6 @@ import datetime
 from .common import db, Field, auth
 from pydal.validators import *
 
-
 def get_user_email():
     return auth.current_user.get('email') if auth.current_user else None
 
@@ -40,5 +39,12 @@ db.define_table("lobbies",
                 Field("user_1", "reference auth_user", default=get_user_id),
                 Field("user_2", "reference auth_user"),
                 Field("game", "reference games"))
+
+
+db.define_table("chat",
+                Field("user", "reference auth_user"),
+                Field("email"),
+                Field("time", default=get_time()),
+                Field("chat"))
 
 db.commit()
