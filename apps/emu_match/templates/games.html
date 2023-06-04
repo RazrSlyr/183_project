@@ -13,15 +13,24 @@
     </thead>
     <tbody>
       [[for game in games:]]
-      <td>[[=game["name"]]]</td>
-      <td>[[=game["platform"]]]</td>
-      <td><a class="button is-success" href="[[=URL('matchmaking', game['id'], signer=url_signer)]]">Join Queue</a></td>
+      <tr>
+        <td>[[=game["name"]]]</td>
+        <td>[[=game["platform"]]]</td>
+        <td>
+          <a
+            class="button is-success"
+            href="[[=URL('matchmaking', game['id'], signer=url_signer)]]"
+            >Join Queue</a
+          >
+        </td>
+      </tr>
       [[pass]]
     </tbody>
   </table>
   <div>
     <p>Don't see the game you want? Add it here!</p>
     <a class="button is-primary" href="[[=URL('add_game', signer=url_signer)]]"
-      >Add Game</a>
+      >Add Game</a
+    >
   </div>
 </div>

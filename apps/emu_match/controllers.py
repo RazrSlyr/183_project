@@ -83,8 +83,8 @@ def check_match(game_id):
         db.lobbies.insert(game=game_id)
         return check_match(game_id)
     # RV: Check if you're already in a lobby
-    my_lobbies = db((db.lobbies["user_1"] == get_user_id()) | (
-        db.lobbies["user_2"] == get_user_id())).select().as_list()
+    my_lobbies = db(((db.lobbies["user_1"] == get_user_id()) | (
+        db.lobbies["user_2"] == get_user_id())) & (db.lobbies["game"] == game_id)).select().as_list()
     if len(my_lobbies) > 0:
         # RV: If so, check if the other user is in there
         lobby = my_lobbies[0]
