@@ -44,27 +44,31 @@ def index():
     return dict(matchmake_url=matchmake_url, chat_url=chat_url, url_signer=url_signer)
 
 
-@action("chat")
-@action.uses("chat.html", url_signer.verify()) 
-def chat(): 
-    get_chat_url = URL("get_chat", signer=url_signer)
-    add_chat_url = URL("add_chat", signer=url_signer)
-    return dict(get_chat_url=get_chat_url, add_chat_url=add_chat_url)
+# MP: Generate urls for general chat
+@action("general_chat") 
+@action.uses("general_chat.html", url_signer.verify())
+def general_chat(): 
+    lobby_num = "0" # MP: Ids for other lobbies start at 1
+    get_chat_url = URL("get_chat", lobby_num,  signer=url_signer)
+    add_chat_url = URL("add_chat", lobby_num,  signer=url_signer)
+    return dict(get_chat_url=get_chat_url, add_chat_url=add_chat_url, lobby_num=lobby_num)
 
-@action("get_chat", method="GET")
+# MP: Get chats for current lobby
+@action("get_chat/<lobby_num:int>", method="GET")
 @action.uses(db, auth.user, url_signer.verify()) 
-def get_chat():     
-    chats = db(db.chat.user != -1).select().as_list()  # change this?
+def get_chat(lobby_num):         
+    chats = db(db.chat.lobby_num == lobby_num).select().as_list()
     return dict(chats=chats)
 
-@action("add_chat", method="POST")
+# MP: Add new chat
+@action("add_chat/<lobby_num:int>", method="POST")
 @action.uses(db, auth.user, url_signer.verify()) 
-def add_chat():
+def add_chat(lobby_num):
     chat = request.params.get("chat")
     if chat == "":
         return "Error"
     else:
-        db.chat.insert(user=get_user_id(), email=get_user_email(), time=get_time(), chat=chat)
+        db.chat.insert(lobby_num=lobby_num, user=get_user_id(), email=get_user_email(), time=get_time(), chat=chat)
         return "ok"
 
 
@@ -111,12 +115,13 @@ def check_match(game_id):
             # RV: user 1 is current user, check if user 2 is there
             if lobby["user_2"] != None:
                 return dict(found=True, url=URL("lobby", lobby["id"], 1, signer=url_signer))
+                
             else:
                 # RV: No one, try again bozo
                 return dict(found=False)
         else:
             # RV: If you are user 2, there must be user 1
-            return dict(found=True, url=URL("lobby", lobby["id"], 2, signer=url_signer))
+            return dict(found=True, url=URL("lobby", lobby["id"], 2, signer=url_signer))            
 
     # RV: Check for lobbies where there is a first user but no second user
     open_lobbies = db((db.lobbies["game"] == game_id) & (
@@ -176,4 +181,8 @@ def lobby(lobby_num, user_num):
     
     opp_info = db(db.auth_user.id == opp_id).select().as_list()[0]
     opp_name = opp_info["email"]
-    return dict(game_name=game_name, opponent=opp_name)
+
+    get_chat_url = URL("get_chat", lobby_num, signer=url_signer)
+    add_chat_url = URL("add_chat", lobby_num, signer=url_signer)
+
+    return dict(game_name=game_name, opponent=opp_name, get_chat_url=get_chat_url, add_chat_url=add_chat_url, lobby_num=lobby_num)
