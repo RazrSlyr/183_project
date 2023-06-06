@@ -1,39 +1,30 @@
-////// Chat
-
-// This will be the object that will contain the Vue attributes
-// and be used to initialize it.
 let app = {};
 
-
-// Given an empty app object, initializes it filling its attributes,
-// creates a Vue instance, and then initializes the Vue instance.
 let init = (app) => {
 
-    // This is the Vue data.
+
     app.data = {
-        // Complete as you see fit.
-        chat_list: [],
-        new_chat: "",
+        chat_list: [], // MP: all chats
+        new_chat: "",  // MP:  new chat
     };
 
-    app.enumerate = (a) => {
-        // This adds an _idx field to each element of the array.
+    app.enumerate = (a) => {        
         let k = 0;
         a.map((e) => { e._idx = k++; });
         return a;
     };
 
+    // MP:  Set interval for get_chat()
     app.update_chat = function () {
         app.checkInterval = setInterval(app.get_chat, 1000);
     }
 
+    // MP:  Get all chats
     app.get_chat = function () {
-        axios.get(get_chat_url).then((response) => {
-            //chat_list = response.data;
+        axios.get(get_chat_url).then((response) => {            
             app.vue.chat_list = [];            
                 response.data.chats.forEach(element => {
-                    console.log(element.email, element.time, element.chat);
-                    // app.vue.chat_list.push(element.chat);
+                    // MP:  console.log(element.email, element.time, element.chat);                    
                     app.vue.chat_list.push({
                         email: element.email,
                         time: element.time,
@@ -43,42 +34,33 @@ let init = (app) => {
         });
     }
 
+    // MP:  Add new chat
     app.add_chat = function (chat) {
         axios.post(add_chat_url, {
             chat: chat,
-        }).then(function (response) {
-            // console.log(response.data);
+        }).then(function (response) {            
         });
 
-        app.vue.chat_list.push(chat);
-        app.vue.new_chat = "";
+        app.vue.chat_list.push(chat);   // MP:  Add to chat list
+        app.vue.new_chat = "";          // MP:  Clear new chat
     }
 
-
-    // This contains all the methods.
     app.methods = {
-        // Complete as you see fit.
         add_chat: app.add_chat,
     };
 
-    // This creates the Vue instance.
     app.vue = new Vue({
         el: "#vue-target",
         data: app.data,
         methods: app.methods
     });
 
-    // And this initializes it.
+
     app.init = () => {
-        // Put here any initialization code.
-        // Typically this is a server GET call to load the data.
-        app.update_chat();
+        app.update_chat();  // MP:  Start updater/set_interval
     };
 
-    // Call to the initializer.
     app.init();
 };
 
-// This takes the (empty) app object, and initializes it,
-// putting all the code i
 init(app);

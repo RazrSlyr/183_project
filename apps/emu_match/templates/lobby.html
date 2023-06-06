@@ -4,6 +4,45 @@
 <div class="section">
   <p class="title">Lobby for [[=game_name]]</p>
   <p class="subtitle">Playing against [[=opponent]]</p>
-  <p>[INSERT CHAT IN HERE]</p>
-
 </div>
+
+<!-- Chat -->
+<div class="section" id="vue-target" v-cloak>
+  <h1 class="title">Chat</h1>
+
+
+
+  <!-- MP: Show Chat -->  
+  <div v-for="c in chat_list" class="box">
+    <article class="media">
+      <div class="media-content">
+        <div class="content">
+          <p>
+            <strong>{{c.email}}</strong> <small>{{c.time}}</small>
+            <br>
+            {{c.chat}}
+          </p>
+        </div>
+    </article>
+  </div>
+  
+  <!-- MP: Add Chat -->
+  <div class="block">
+    <div class="field">
+      <p class="control">
+        <input class="input" type="text" v-model="new_chat" />
+      </p>
+    </div>
+    <button class="button is-primary" @click="add_chat(new_chat)">Submit</button>
+  </div>
+</div>
+
+
+<!-- MP: Chat Urls and Script -->
+[[block page_scripts]]
+<script>
+  let add_chat_url = "[[=XML(add_chat_url)]]";
+  let get_chat_url = "[[=XML(get_chat_url)]]";
+</script>
+<script src="js/chat.js"></script>
+[[end]]

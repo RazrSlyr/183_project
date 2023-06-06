@@ -3,6 +3,40 @@
 <div class="section">
   <h1 class="title">Games</h1>
 
+  <div class="columns">
+    [[for game in games:]]
+    <div class="column is-one-quarter">
+      <div class="card">
+        <div class="card-image">
+          <figure class="image is-4">
+            <img src="EmuLogo3.jpg" alt="Placeholder image">
+          </figure>
+        </div>
+        <div class="card-content">
+          <div class="media">
+
+            <div class="media-content">
+              <p class="title is-4">[[=game["name"]]]</p>
+              <p class="subtitle is-6">Platform: [[=game["platform"]]]</p>
+            </div>
+
+            <div class="media-right">
+              <a
+                class="button is-success"
+                href="[[=URL('matchmaking', game['id'], signer=url_signer)]]"
+                >Join Queue
+              </a>
+            </div>
+            
+          </div>
+      
+        </div>
+      </div>
+    </div>
+    [[pass]]
+    
+  </div>
+
   <table class="table">
     <thead>
       <tr>
@@ -12,6 +46,7 @@
       </tr>
     </thead>
     <tbody>
+
       [[for game in games:]]
       <tr>
         <td>[[=game["name"]]]</td>
@@ -34,3 +69,22 @@
     >
   </div>
 </div>
+
+<!--<div class="card">
+        <div class="card-image">
+          <figure class="image is-4by3">
+            <img src="EmuLogo4.png" alt="Placeholder image">
+          </figure>
+        </div>
+        <div class="card-content">
+          <div class="media">
+            
+            <div class="media-content">
+              <p class="title is-4">[[=game["name"]]]</p>
+              <p class="subtitle is-6">Platform: [[=game["platform"]]]</p>
+            </div>
+          </div>
+      
+        </div>
+      </div>
+-->
