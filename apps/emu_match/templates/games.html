@@ -21,10 +21,21 @@
             </div>
 
             <div class="media-right">
+              
               <a
                 class="button is-success"
                 href="[[=URL('matchmaking', game['id'], signer=url_signer)]]"
-                >Join Queue
+                >
+                
+                  <span class="icon is-small">
+                    <span class="fa-stack">
+                      <i class="fas fa-circle 
+                        fa-stack-2x has-text-success" style="margin-left:-20px"></i>
+                      <i class="fas fa-play is-medium
+                        fa-stack-1x has-text-white"></i>
+                    </span>
+                  </span>
+                
               </a>
             </div>
             
@@ -34,6 +45,28 @@
       </div>
     </div>
     [[pass]]
+
+    <div class="column is-one-quarter">
+      <div class="card">
+
+        <div class="card-content">
+          <div class="content">
+            <p>Don't see the game you want? Add it here!</p>
+          </div>
+        </div>
+
+        <footer class="card-footer">
+          <p class="card-footer-item">
+              <span>
+                <a class="button is-primary" href="[[=URL('add_game', signer=url_signer)]]">
+                  Add Game
+                </a>
+              </span>
+          </p>
+          
+        </footer>
+      </div>
+    </div>
     
   </div>
 
@@ -70,21 +103,6 @@
   </div>
 </div>
 
-<!--<div class="card">
-        <div class="card-image">
-          <figure class="image is-4by3">
-            <img src="EmuLogo4.png" alt="Placeholder image">
-          </figure>
-        </div>
-        <div class="card-content">
-          <div class="media">
-            
-            <div class="media-content">
-              <p class="title is-4">[[=game["name"]]]</p>
-              <p class="subtitle is-6">Platform: [[=game["platform"]]]</p>
-            </div>
-          </div>
-      
-        </div>
-      </div>
--->
+[[block page_scripts]]
+<script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
+[[end]]
