@@ -7,16 +7,15 @@
     <link rel="shortcut icon" href="data:image/x-icon;base64,AAABAAEAAQEAAAEAIAAwAAAAFgAAACgAAAABAAAAAgAAAAEAIAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAPAAAAAA=="/>
     <link rel="stylesheet" href="css/bulma.css">
     <link rel="stylesheet" href="font-awesome-4.7.0/css/font-awesome.css">
-    [[block page_head]]<!-- individual pages can customize header here -->[[end]]
+    [[block page_head]][[end]]
   </head>
   <body>
-    <!-- Navigation bar -->
+    
     <nav class="navbar" role="navigation" aria-label="main navigation" style="background-color:#461E79;">
       <div class="navbar-brand">
         <a class="navbar-item has-text-light" href="[[=URL('index')]]">
           <img src="EmuLogo6.jpg" alt="Logo" width="80" height="80">
           
-          <!-- <img class="logo" width="150" src="images/site_icon.png"> -->
         </a>
 
 
@@ -30,7 +29,7 @@
 
       <div id="the-navbar-menu" class="navbar-menu">
         <div class="navbar-start">
-          [[block page_menu_items]]<!-- individual pages can add menu items here -->[[end]]
+          [[block page_menu_items]][[end]]
         </div>
 
         <div class="navbar-end">
@@ -63,9 +62,9 @@
       </div>
     </nav>
 
-    <!-- beginning of HTML inserted by extending template -->
+    
     [[include]]
-    <!-- end of HTML inserted by extending template -->
+    
     <footer class="footer" style="background-color: #484848;">
       <div class="content has-text-centered has-text-light">
         Made with <a href="https://py4web.com">py4web</a>.
@@ -77,5 +76,5 @@
   <script src="js/axios.min.js"></script>
   <script src="js/vue.js"></script>
   <script src="js/utils.js"></script>
-  [[block page_scripts]]<!-- individual pages can add scripts here -->[[end]]
+  [[block page_scripts]][[end]]
 </html>
