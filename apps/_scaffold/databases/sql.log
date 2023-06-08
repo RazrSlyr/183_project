@@ -175,3 +175,12 @@ CREATE TABLE "py4web_session"(
     "created_on" TIMESTAMP,
     "expires_on" TIMESTAMP
 );
+timestamp: 2023-06-07T17:46:13.531473
+CREATE TABLE "py4web_session"(
+    "id" INTEGER PRIMARY KEY AUTOINCREMENT,
+    "rkey" CHAR(512),
+    "rvalue" TEXT,
+    "expiration" INTEGER,
+    "created_on" TIMESTAMP,
+    "expires_on" TIMESTAMP
+);
