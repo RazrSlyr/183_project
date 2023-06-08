@@ -1,12 +1,13 @@
 [[extend 'layout.html']]
 
+<body style="background-color: #686868;"></body>
 <div class="section">
-  <h1 class="title">Games</h1>
+  <h1 class="title has-text-light">Games</h1>
 
   <div class="columns">
     [[for game in games:]]
     <div class="column is-one-quarter">
-      <div class="card">
+      <div class="card shadow-2xl rounded-b-2xl is-cursor-pointer transform is-duration-300 hover-translate-y">
         <div class="card-image">
           <figure class="image is-4">
             <img src="EmuLogo3.jpg" alt="Placeholder image">
@@ -47,7 +48,7 @@
     [[pass]]
 
     <div class="column is-one-quarter">
-      <div class="card">
+      <div class="card shadow-2xl rounded-xl is-cursor-pointer transform is-duration-300 hover-translate-y">
 
         <div class="card-content">
           <div class="content">
@@ -70,7 +71,7 @@
     
   </div>
 
-  <table class="table">
+  <table class="table has-text-light" style="background-color: #686868;">
     <thead>
       <tr>
         <th>Game Name</th>
@@ -96,7 +97,7 @@
     </tbody>
   </table>
   <div>
-    <p>Don't see the game you want? Add it here!</p>
+    <p class="has-text-light">Don't see the game you want? Add it here!</p>
     <a class="button is-primary" href="[[=URL('add_game', signer=url_signer)]]"
       >Add Game</a
     >
