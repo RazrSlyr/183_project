@@ -9,7 +9,7 @@ Second is the community feature. Users can join a global chat to discuss any top
 
 ## Group Members
 
-|Name|Email|Project
+|Name|Email|Project <br/>
 Rohan Venkatapuram|rnvenkat@ucsc.edu|EMU MATCH <br/>
 Martin Perina|mperina@ucsc.edu|EMU MATCH <br/>
 Parmesan|pshah6@ucsc.edu|EMU MATCH <br/>
