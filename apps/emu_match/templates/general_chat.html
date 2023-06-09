@@ -4,37 +4,53 @@
   [v-cloak] {
     display: none;
   }
+  /* Custom styling for chat bubble */
+  .chat-bubble {
+    border-radius: 15px;
+    padding: 10px;
+    background-color: #eeae25;
+    margin: 10px 0;
+    color: #000000;
+  }
+  .chat-bubble strong {
+    color: #000000;
+  }
+  .chat-bubble small {
+    color: #000000;
+  }
 </style>
 
-
 <div class="section" id="vue-target" v-cloak>
-  <h1 class="title">Chat</h1>
+  <h1 class="title">General Chat</h1>
 
   <!-- MP: Show Chat -->
   <div v-for="c in chat_list" class="box">
     <article class="media">
       <div class="media-content">
-        <div class="content">
+        <div class="content chat-bubble">
           <p>
             <strong>{{c.email}}</strong> <small> {{c.time}}</small>
             <br>
             {{c.chat}}
           </p>
         </div>
+      </div>
     </article>
   </div>
   
   <!-- MP: Add Chat -->
   <div class="block">
     <div class="field">
-      <p class="control">
-        <input class="input" type="text" v-model="new_chat" />
+      <p class="control has-icons-left">
+        <input class="input" type="text" v-model="new_chat" placeholder="Enter your message here"/>
+        <span class="icon is-small is-left">
+          <i class="fas fa-envelope"></i>
+        </span>
       </p>
     </div>
     <button class="button is-primary" @click="add_chat(new_chat)">Submit</button>
   </div>
 </div>
-
 
 <!-- MP: Chat Urls and Script -->
 [[block page_scripts]]

@@ -1,9 +1,77 @@
 [[extend 'layout.html']]
 
+<body style="background-color: #686868;"></body>
 <div class="section">
-  <h1 class="title">Games</h1>
+  <h1 class="title has-text-light">Games</h1>
 
-  <table class="table">
+  <div class="columns is-multiline">
+    [[for game in games:]]
+    <div class="column is-one-quarter">
+      <div class="card shadow-2xl rounded-b-2xl is-cursor-pointer transform is-duration-300 hover-translate-y">
+        <div class="card-image">
+          <figure class="image is-4">
+            <img src="EmuLogo3.jpg" alt="Placeholder image">
+          </figure>
+        </div>
+        <div class="card-content">
+          <div class="media">
+
+            <div class="media-content">
+              <p class="title is-4">[[=game["name"]]]</p>
+              <p class="subtitle is-6">Platform: [[=game["platform"]]]</p>
+            </div>
+
+            <div class="media-right">
+              
+              <a
+                class="button is-success"
+                href="[[=URL('matchmaking', game['id'], signer=url_signer)]]"
+                >
+                
+                  <span class="icon is-small">
+                    <span class="fa-stack">
+                      <i class="fas fa-circle 
+                        fa-stack-2x has-text-success" style="margin-left:-20px"></i>
+                      <i class="fas fa-play is-medium
+                        fa-stack-1x has-text-white"></i>
+                    </span>
+                  </span>
+                
+              </a>
+            </div>
+            
+          </div>
+      
+        </div>
+      </div>
+    </div>
+    [[pass]]
+
+    <div class="column is-one-quarter">
+      <div class="card shadow-2xl rounded-xl is-cursor-pointer transform is-duration-300 hover-translate-y">
+
+        <div class="card-content">
+          <div class="content">
+            <p>Don't see the game you want? Add it here!</p>
+          </div>
+        </div>
+
+        <footer class="card-footer">
+          <p class="card-footer-item">
+              <span>
+                <a class="button is-primary" href="[[=URL('add_game', signer=url_signer)]]">
+                  Add Game
+                </a>
+              </span>
+          </p>
+          
+        </footer>
+      </div>
+    </div>
+    
+  </div>
+
+  <table class="table has-text-light" style="background-color: #686868;">
     <thead>
       <tr>
         <th>Game Name</th>
@@ -12,6 +80,7 @@
       </tr>
     </thead>
     <tbody>
+
       [[for game in games:]]
       <tr>
         <td>[[=game["name"]]]</td>
@@ -28,9 +97,13 @@
     </tbody>
   </table>
   <div>
-    <p>Don't see the game you want? Add it here!</p>
+    <p class="has-text-light">Don't see the game you want? Add it here!</p>
     <a class="button is-primary" href="[[=URL('add_game', signer=url_signer)]]"
       >Add Game</a
     >
   </div>
 </div>
+
+[[block page_scripts]]
+<script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
+[[end]]
