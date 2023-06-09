@@ -10,11 +10,11 @@ Second is the community feature. Users can join a global chat to discuss any top
 ## Group Members
 
 |Name|Email|Project
-Rohan Venkatapuram|rnvenkat@ucsc.edu|EMU MATCH
-Martin Perina|mperina@ucsc.edu|EMU MATCH
-Parmesan|pshah6@ucsc.edu|EMU MATCH
-Jiyu Dong|jdong36@ucsc.edu|EMU MATCH
-Xujun Xie|xxie36@ucsc.edu|EMU MATCH
+Rohan Venkatapuram|rnvenkat@ucsc.edu|EMU MATCH <br/>
+Martin Perina|mperina@ucsc.edu|EMU MATCH <br/>
+Parmesan|pshah6@ucsc.edu|EMU MATCH <br/>
+Jiyu Dong|jdong36@ucsc.edu|EMU MATCH <br/>
+Xujun Xie|xxie36@ucsc.edu|EMU MATCH <br/>
 
 
 ## Feature
