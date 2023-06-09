@@ -41,7 +41,7 @@ def index():
     return dict(matchmake_url=matchmake_url, chat_url=chat_url)
 
 @action("chat")
-@action.uses("chat.html", url_signer.verify()) 
+@action.uses("chat.html",  auth.user,url_signer.verify())
 def chat(): 
     # define chat urls
     get_chat_url = URL("get_chat", signer=url_signer)
@@ -68,7 +68,7 @@ def chat():
 
 
 @action("matchmaking")
-@action.uses("matchmaking.html", url_signer.verify()) 
+@action.uses("matchmaking.html",  auth.user,url_signer.verify())
 def matchmaking():
     # Put the code for the matchmaking page here
     return dict(queue_url=URL("join_queue", signer=url_signer),

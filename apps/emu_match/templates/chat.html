@@ -4,6 +4,9 @@
   [v-cloak] {
     display: none;
   }
+  span{
+  margin:1px;
+  }
 </style>
 
 
@@ -13,30 +16,56 @@
 
 
   <!-- Show Chat -->
-  <div v-for="c in chat_list" class="box">
+  <div v-for="(item,index) in chat_list" class="box" :key="item.id" >
+
     <article class="media">
       <div class="media-content">
         <div class="content">
-          <p>
-            <strong>{{c.email}}</strong> <small>{{c.time}}</small>
+          
+            <strong class="left-align">{{item.email}}</strong> <small style="float: right !important;">{{item.time}}</small>
             <br>
-            {{c.chat}}
-          </p>
+            {{item.chat}}
+         
+              <div style="float: right !important;">
+
+              
+               <span class="tag is-white" @click="increment(index)" ><i class="fa fa-thumbs-up fa-2x" aria-hidden="true"></i>&nbsp;{{item.counter.likes}}</span>
+               <span class="tag is-white" @click="decrement(index)" ><i class="fa fa-thumbs-down fa-2x" aria-hidden="true"></i>&nbsp;{{item.counter.dislikes}}</span>
+             
+              </div>
         </div>
     </article>
   </div>
 
   <!-- Add Chat -->
   <div class="block">
-    <div class="field">
-      <p class="control">
-        <input class="input" type="text" v-model="new_chat" />
-      </p>
-    </div>
-    <button class="button is-primary" @click="add_chat(new_chat)">Submit</button>
+    <div class="field has-addons">
+  <div class="control" style="width: 100%;">
+    <input class="input is-large" type="text" v-model="new_chat" />
+  </div>
+  <div class="control">
+    <button class="button is-primary is-large" @click="add_chat(new_chat)">Send</button>
   </div>
 </div>
+  </div>
 
+</div>
+
+<script>
+// When the user clicks on div, open the popup
+
+ 
+
+
+   let myfunction = function(e){
+        // For the boolean value
+       
+        alert(e); 
+    }
+
+  
+ 
+</script>
 [[block page_scripts]]
 <script>
   let add_chat_url = "[[=XML(add_chat_url)]]";
