@@ -1,0 +1,75 @@
+[[extend 'layout.html']]
+
+<style>
+  [v-cloak] {
+    display: none;
+  }
+  span{
+  margin:1px;
+  }
+</style>
+
+
+<div class="section" id="vue-target" v-cloak>  
+  <h1 class="title">Chat</h1>
+
+
+
+  <!-- Show Chat -->
+  <div v-for="(item,index) in chat_list" class="box" :key="item.id" >
+
+    <article class="media">
+      <div class="media-content">
+        <div class="content">
+          
+            <strong class="left-align">{{item.email}}</strong> <small style="float: right !important;">{{item.time}}</small>
+            <br>
+            {{item.chat}}
+         
+              <div style="float: right !important;">
+
+              
+               <span class="tag is-white" @click="increment(index)" ><i class="fa fa-thumbs-up fa-2x" aria-hidden="true"></i>&nbsp;{{item.counter.likes}}</span>
+               <span class="tag is-white" @click="decrement(index)" ><i class="fa fa-thumbs-down fa-2x" aria-hidden="true"></i>&nbsp;{{item.counter.dislikes}}</span>
+             
+              </div>
+        </div>
+    </article>
+  </div>
+
+  <!-- Add Chat -->
+  <div class="block">
+    <div class="field has-addons">
+  <div class="control" style="width: 100%;">
+    <input class="input is-large" type="text" v-model="new_chat" />
+  </div>
+  <div class="control">
+    <button class="button is-primary is-large" @click="add_chat(new_chat)">Send</button>
+  </div>
+</div>
+  </div>
+
+</div>
+
+<script>
+// When the user clicks on div, open the popup
+
+ 
+
+
+   let myfunction = function(e){
+        // For the boolean value
+       
+        alert(e); 
+    }
+
+  
+ 
+</script>
+[[block page_scripts]]
+<script>
+  let add_chat_url = "[[=XML(add_chat_url)]]";
+  let get_chat_url = "[[=XML(get_chat_url)]]";
+</script>
+<script src="js/chat.js"></script>
+[[end]]

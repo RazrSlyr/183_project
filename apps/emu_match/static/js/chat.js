@@ -29,6 +29,10 @@ let init = (app) => {
                         email: element.email,
                         time: element.time,
                         chat: element.chat,
+                        counter: {
+                            likes: 0,
+                            dislikes: 0
+                          }
                     });
                 });            
         });
@@ -41,36 +45,35 @@ let init = (app) => {
         }).then(function (response) {            
         });
 
+        app.vue.chat_list.push(chat);
+        app.vue.new_chat = "";
+    }
+    //add reaction
+    app.add_react = function (chat) {
+        axios.post(add_chat_url, {
+            chat: chat,
+        }).then(function (response) {            
+        });
+
         app.vue.chat_list.push(chat);   // MP:  Add to chat list
         app.vue.new_chat = "";          // MP:  Clear new chat
     }
 
-    app.check_lobby = function() {
-        if (check_lobby_url === undefined) return;
-        axios.get(check_lobby_url).then((response) => {
-            // RV: if the message is anything other than OK, leave
-            let message = response.data["message"];
-            if (message != "OK") {
-                document.location.href = response.data["url"];
-            }
-        })
-    }
-
-    // RV: close the lobby
-    app.close_lobby = function() {
-        if (close_lobby_url === undefined) return;
-        axios.get(close_lobby_url).then((response) => {
-            // RV: Lobby has been closed, go back to url
-            console.log(response.data);
-            document.location.href = response.data["url"];
-        })
-    }
-
-    app.methods = {
+     app.increment= function(index) {
+        this.chat_list[index].counter.likes++;
+      }
+     app.decrement= function(index) {
+        this.chat_list[index].counter.dislikes++;
+      }
+    
+    app.methods = {    
         add_chat: app.add_chat,
-        close_lobby: app.close_lobby
+        add_react: app.add_react,
+        increment: app.increment,
+        decrement: app.decrement,
     };
 
+    
     app.vue = new Vue({
         el: "#vue-target",
         data: app.data,

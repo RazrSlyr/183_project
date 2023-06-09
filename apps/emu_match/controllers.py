@@ -9,9 +9,8 @@ url_signer = URLSigner(session)
 
 
 @action("index")
-@action.uses("index.html", auth, T, url_signer)
-def index():
-    # RV: Put the index code here
+@action.uses("index.html", auth.user, T, url_signer)
+def index():    
     matchmake_url = URL("matchmaking", signer=url_signer)
     chat_url = URL("chat", signer=url_signer)
     return dict(matchmake_url=matchmake_url, chat_url=chat_url, url_signer=url_signer)
