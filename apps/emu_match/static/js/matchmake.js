@@ -15,17 +15,8 @@ let init = (app) => {
 
     app.check_interval = null;
 
-    app.join_queue = function () {
-        axios.get(queue_url).then((response) => {
-            app.in_queue = true;
-            // RV: Start Looking for match
-            app.checkInterval = setInterval(app.check_match, 1000);
-        });
-    }
-
     // RV: check for a match
     app.check_match = function () {
-        console.log("hello");
         if (app.vue.match !== null) return;
         axios.get(check_url).then((response) => {
             // RV: Check response data
@@ -38,10 +29,18 @@ let init = (app) => {
         });
     }
 
+    app.leave_queue = function () {
+        axios.get(leave_url).then((response) => {
+            // RV: You have left the queue, redirect to games page
+            document.location.href = response.data["url"];
+        })
+    }
+
 
     // This contains all the methods.
     app.methods = {
         // Complete as you see fit.
+        leave_queue: app.leave_queue
     };
 
     // This creates the Vue instance.
@@ -53,7 +52,8 @@ let init = (app) => {
 
     // And this initializes it.
     app.init = () => {
-        app.join_queue()
+        app.check_match();
+        app.checkInterval = setInterval(app.check_match, 1000);
     };
 
     // Call to the initializer.

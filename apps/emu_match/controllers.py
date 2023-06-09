@@ -78,23 +78,8 @@ def add_chat(lobby_num):
 def matchmaking(game_id):
     # Put the code for the matchmaking page here
     print(game_id)
-    return dict(queue_url=URL("join_queue", game_id, signer=url_signer),
-                leave_url=URL("leave_queue", game_id, signer=url_signer),
+    return dict(leave_url=URL("leave_queue", game_id, signer=url_signer),
                 check_url=URL("check_match", game_id, signer=url_signer))
-
-
-@action("join_queue/<game_id:int>")
-@action.uses(url_signer.verify())
-def join_queue(game_id):
-    # RV: check if already in queue
-    queue_entry = db(db.matchmaking["uid"] == get_user_id()).select().as_list()
-    if (len(queue_entry) > 0):
-        # RV: Already in requeue
-        return "ALREADY IN QUEUE"
-    # RV: Else, add to queue
-    db.matchmaking.insert(uid=get_user_id(),
-                          game=game_id)
-    return "OK"
 
 
 @action("check_match/<game_id:int>")
@@ -123,6 +108,45 @@ def check_match(game_id):
         else:
             # RV: If you are user 2, there must be user 1
             return dict(found=True, url=URL("lobby", lobby["id"], 2, signer=url_signer))            
+
+    # RV: Check for lobbies where there is a first user but no second user
+    open_lobbies = db((db.lobbies["game"] == game_id) & (
+        (db.lobbies["user_1"] != None) | (db.lobbies["user_2"] == None))).select().as_list()
+    if len(open_lobbies) > 0:
+        # RV: Grab first open lobby and add user at user 2
+        lobby = open_lobbies[0]
+        db.lobbies[lobby["id"]] = dict(user_2=get_user_id())
+        return check_match(game_id)
+    
+    # RV: No lobbies that work here, make a new lobby
+    # RV: Make a lobby for this game and check again
+    db.lobbies.insert(game=game_id)
+    return check_match(game_id)
+
+@action("leave_queue/<game_id:int>")
+@action.uses(url_signer, url_signer.verify())
+def leave_match(game_id):
+    # RV: Check if you're already in a lobby
+    my_lobbies = db(((db.lobbies["user_1"] == get_user_id()) | (
+        db.lobbies["user_2"] == get_user_id())) & (db.lobbies["game"] == game_id)).select().as_list()
+    if len(my_lobbies) > 0:
+        # RV: If so, check if the other user is in there
+        lobby = my_lobbies[0]
+        if lobby["user_1"] == get_user_id():
+            # RV: user 1 is current user, check if user 2 is there
+            if lobby["user_2"] != None:
+                # RV: If there is a user 2, then you are in a lobby not queue
+                # RV: You would need to use the close lobby function
+                return dict(message="OK", url=URL("games"))
+                
+            else:
+                # RV: Delete this lobby
+                del db.lobbies[lobby["id"]]
+                return dict(message="OK", url=URL("games"))
+        else:
+            # RV: If you are user 2, there must be user 1
+            # RV: This means you are already in a lobby and must use close lobby
+            return dict(message="OK", url=URL("games"))            
 
     # RV: Check for lobbies where there is a first user but no second user
     open_lobbies = db((db.lobbies["game"] == game_id) & (
