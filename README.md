@@ -18,20 +18,20 @@ Xujun Xie|xxie36@ucsc.edu|EMU MATCH <br/>
 
 
 ## Feature
-  Back to main page: users can back to main page anytime by clicking the logo that located on the topleft corner of the web page.
-  <br/>
+  Main Page: At any time, users can return to the main page by clicking on the logo situated in the top-left corner of the webpage.
+<br/>
 
-  General Chat: users can join a global chat and chat with all the users that are also in the global chat, whatever which game they are in.
-  <br/>
+Global Chat: Users have the ability to participate in a global chat and converse with other users in the same chat, irrespective of the game they are playing.
+<br/>
 
-  Game Room: users can access the game lobby by clicking the Game button on the top of the bar or by simply clicking the "Let's Join the game" on the bottom of the page.
-  <br/>
+Game Lobby: By clicking on the 'Game' button located at the top of the toolbar, or by simply clicking 'Let's Join the game' at the bottom of the page, users can access the game lobby.
+<br/>
 
-  Game Create: In the game room ,if users didn't find the game that they want, user can create their own game by simply click the Add game button.
-  <br/>
+Game Creation: Within the game room, if users can't find the game they're looking for, they have the option to create their own game by simply clicking the 'Add game' button.
+<br/>
 
-  Queue: Users can either join the queue of the game they want by clicking the Join queue button in the overview table or just click the start button that on the game. Also users are free to leave queue anytime by clicking the leavue queue button.
-  <br/>
+Joining and Leaving Game Queue: Users can join the queue for a desired game by clicking the 'Join queue' button in the overview table or by clicking the start button on the game. Users also have the freedom to leave the queue at any time by clicking the 'Leave queue' button.
+<br/>
 
-  Lobby chat: after pair with other users, users can chat with each others by typing message in the lobby chat, or leave the lobby by clicking the logo button located on the topleft corner of the page or Report Loss button on the bottom of the lobby chat page.
-  <br/>
+Lobby Chat: After being paired with other users, they can interact with each other via the lobby chat. Users can also exit the lobby by hitting the 'Report Loss' button at the bottom of the lobby chat page.
+<br/>
