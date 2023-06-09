@@ -29,17 +29,11 @@ db.define_table("games",
                 Field("name"),
                 Field("platform"))
 
-# RV: All users who are looking for a match
-db.define_table("matchmaking",
-                Field("uid", "reference auth_user", default=get_user_id),
-                Field("game", "reference games"))
-
 # RV: All matched lobbies (or lobbies in the process of being matched)
 db.define_table("lobbies",
                 Field("user_1", "reference auth_user", default=get_user_id),
                 Field("user_2", "reference auth_user"),
                 Field("game", "reference games"))
-
 
 # MP: All chats seperated by lobby_num
 db.define_table("chat",

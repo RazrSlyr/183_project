@@ -17,7 +17,7 @@ Jiyu Dong|jdong36@ucsc.edu|EMU MATCH <br/>
 Xujun Xie|xxie36@ucsc.edu|EMU MATCH <br/>
 
 
-## Feature
+## Features
   Main Page: At any time, users can return to the main page by clicking on the logo situated in the top-left corner of the webpage.
 <br/>
 
