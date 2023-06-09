@@ -55,6 +55,10 @@
     </div>
     <button class="button is-primary" @click="add_chat(new_chat)">Submit</button>
   </div>
+
+  <!-- RV: Leave Lobby -->
+  <button class="button is-danger" @click="close_lobby()">Report Loss</button>
+
 </div>
 
 <!-- MP: Chat Urls and Script -->
@@ -62,6 +66,8 @@
 <script>
   let add_chat_url = "[[=XML(add_chat_url)]]";
   let get_chat_url = "[[=XML(get_chat_url)]]";
+  let check_lobby_url = "[[=XML(check_lobby_url)]]";
+  let close_lobby_url = "[[=XML(close_lobby_url)]]";
 </script>
 <script src="js/chat.js"></script>
 [[end]]

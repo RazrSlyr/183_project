@@ -45,8 +45,30 @@ let init = (app) => {
         app.vue.new_chat = "";          // MP:  Clear new chat
     }
 
+    app.check_lobby = function() {
+        if (check_lobby_url === undefined) return;
+        axios.get(check_lobby_url).then((response) => {
+            // RV: if the message is anything other than OK, leave
+            let message = response.data["message"];
+            if (message != "OK") {
+                document.location.href = response.data["url"];
+            }
+        })
+    }
+
+    // RV: close the lobby
+    app.close_lobby = function() {
+        if (close_lobby_url === undefined) return;
+        axios.get(close_lobby_url).then((response) => {
+            // RV: Lobby has been closed, go back to url
+            console.log(response.data);
+            document.location.href = response.data["url"];
+        })
+    }
+
     app.methods = {
         add_chat: app.add_chat,
+        close_lobby: app.close_lobby
     };
 
     app.vue = new Vue({
@@ -58,6 +80,7 @@ let init = (app) => {
 
     app.init = () => {
         app.update_chat();  // MP:  Start updater/set_interval
+        setInterval(app.check_lobby, 1000); // RV: Start checking lobby status
     };
 
     app.init();

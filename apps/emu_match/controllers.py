@@ -156,11 +156,6 @@ def leave_match(game_id):
         lobby = open_lobbies[0]
         db.lobbies[lobby["id"]] = dict(user_2=get_user_id())
         return check_match(game_id)
-    
-    # RV: No lobbies that work here, make a new lobby
-    # RV: Make a lobby for this game and check again
-    db.lobbies.insert(game=game_id)
-    return check_match(game_id)
 
 
 @action("games")
@@ -204,10 +199,38 @@ def lobby(lobby_num, user_num):
         # RV: Get user 1
         opp_id = lobby_info["user_1"]
     
+    # RV: Get information aobut opponent
     opp_info = db(db.auth_user.id == opp_id).select().as_list()[0]
     opp_name = opp_info["email"]
 
     get_chat_url = URL("get_chat", lobby_num, signer=url_signer)
     add_chat_url = URL("add_chat", lobby_num, signer=url_signer)
+    close_lobby_url = URL("close_lobby", lobby_num, signer=url_signer)
+    check_lobby_url = URL("check_lobby", lobby_num, signer=url_signer)
 
-    return dict(game_name=game_name, opponent=opp_name, get_chat_url=get_chat_url, add_chat_url=add_chat_url, lobby_num=lobby_num)
+    return dict(game_name=game_name, opponent=opp_name, get_chat_url=get_chat_url, add_chat_url=add_chat_url, lobby_num=lobby_num,
+                close_lobby_url=close_lobby_url, check_lobby_url=check_lobby_url)
+
+@action("close_lobby/<lobby_num:int>")
+@action.uses(url_signer.verify())
+def close_lobby(lobby_num):
+    # RV: Close the lobby and chatroom
+    lobby = db(db.lobbies.id == lobby_num).select().as_list()
+    if (len(lobby) == 0):
+        # RV: Lobby has been closed already
+        return dict(message="Victory!", url=URL("games"))
+    else:
+        # RV: Delete the lobby
+        del db.lobbies[lobby[0]["id"]]
+        return dict(message="Defeat!", url=URL("games"))
+
+@action("check_lobby/<lobby_num:int>")
+@action.uses(url_signer.verify())
+def check_lobby(lobby_num):
+    # RV: Check if lobby exists
+    lobby = db(db.lobbies.id == lobby_num).select().as_list()
+    if (len(lobby) == 0):
+        return dict(message="Victoy!", url=URL("games"))
+    # RV: Lobby is fine
+    return dict(message="OK")
+
