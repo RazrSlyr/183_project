@@ -14,12 +14,17 @@
     Matched with {{match}}
   </p>
 
+  <button class="is-primary button" @click="exit_queue">
+    Leave Queue
+  </button>
+
 </div>
 
 [[block page_scripts]]
 <!-- Loads the index-specific js for Vue -->
 <script>
   let queue_url = "[[=XML(queue_url)]]";
+  let check_url = "[[=XML(check_url)]]";
   let check_url = "[[=XML(check_url)]]";
 </script>
 <script src="js/matchmake.js"></script>

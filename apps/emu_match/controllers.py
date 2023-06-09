@@ -79,6 +79,7 @@ def matchmaking(game_id):
     # Put the code for the matchmaking page here
     print(game_id)
     return dict(queue_url=URL("join_queue", game_id, signer=url_signer),
+                leave_url=URL("leave_queue", game_id, signer=url_signer),
                 check_url=URL("check_match", game_id, signer=url_signer))
 
 
