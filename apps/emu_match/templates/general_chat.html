@@ -24,17 +24,25 @@
   <h1 class="title">General Chat</h1>
 
   <!-- MP: Show Chat -->
-  <div v-for="c in chat_list" class="box">
+  <div v-for="(item,index) in chat_list" class="box" :key="item.id" >
+
     <article class="media">
       <div class="media-content">
         <div class="content chat-bubble">
-          <p>
-            <strong>{{c.email}}</strong> <small> {{c.time}}</small>
+          
+          
+            <strong class="left-align">{{item.email}}</strong> <small style="float: right !important;">{{item.time}}</small>
             <br>
-            {{c.chat}}
-          </p>
+            {{item.chat}}
+         
+              <div style="float: right !important;">
+
+              
+               <span style="background-color: #eeae25" class="tag is-white" @click="increment(index)" ><i class="fa fa-thumbs-up fa-2x" style="background-color: #eeae25" aria-hidden="true"></i>&nbsp;{{item.counter.likes}}</span>
+               <span style="background-color: #eeae25" class="tag is-white" @click="decrement(index)" ><i class="fa fa-thumbs-down fa-2x" style="background-color: #eeae25" aria-hidden="true"></i>&nbsp;{{item.counter.dislikes}}</span>
+             
+              </div>
         </div>
-      </div>
     </article>
   </div>
   

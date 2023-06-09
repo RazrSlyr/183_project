@@ -35,6 +35,7 @@ db.define_table("lobbies",
                 Field("user_2", "reference auth_user"),
                 Field("game", "reference games"))
 
+
 # MP: All chats seperated by lobby_num
 db.define_table("chat",
                 Field("lobby_num"),

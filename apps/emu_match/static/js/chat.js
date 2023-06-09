@@ -24,7 +24,7 @@ let init = (app) => {
         axios.get(get_chat_url).then((response) => {            
             app.vue.chat_list = [];            
                 response.data.chats.forEach(element => {
-                    // MP:  console.log(element.email, element.time, element.chat);                    
+                    console.log(element.email, element.time, element.chat);                    
                     app.vue.chat_list.push({
                         email: element.email,
                         time: element.time,
