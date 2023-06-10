@@ -15,7 +15,6 @@
 
 
 
-  <!-- Show Chat -->
   <div v-for="(item,index) in chat_list" class="box" :key="item.id" >
 
     <article class="media">
@@ -37,7 +36,6 @@
     </article>
   </div>
 
-  <!-- Add Chat -->
   <div class="block">
     <div class="field has-addons">
   <div class="control" style="width: 100%;">
@@ -52,13 +50,11 @@
 </div>
 
 <script>
-// When the user clicks on div, open the popup
 
  
 
 
    let myfunction = function(e){
-        // For the boolean value
        
         alert(e); 
     }
