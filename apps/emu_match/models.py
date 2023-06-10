@@ -42,6 +42,9 @@ db.define_table("chat",
                 Field("user", "reference auth_user"),
                 Field("email"),
                 Field("time", default=get_time()),
+                Field("likes", "integer", default=0),
                 Field("chat"))
+
+
 
 db.commit()

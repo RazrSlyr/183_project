@@ -23,7 +23,9 @@ def general_chat():
     lobby_num = "0" # MP: Ids for other lobbies start at 1
     get_chat_url = URL("get_chat", lobby_num,  signer=url_signer)
     add_chat_url = URL("add_chat", lobby_num,  signer=url_signer)
-    return dict(get_chat_url=get_chat_url, add_chat_url=add_chat_url, lobby_num=lobby_num)
+    like_chat_url = URL("like_chat")
+    return dict(get_chat_url=get_chat_url, add_chat_url=add_chat_url, lobby_num=lobby_num, 
+                like_chat_url=like_chat_url)
 
 # MP: Get chats for current lobby
 @action("get_chat/<lobby_num:int>", method="GET")
@@ -179,9 +181,10 @@ def lobby(lobby_num, user_num):
     add_chat_url = URL("add_chat", lobby_num, signer=url_signer)
     close_lobby_url = URL("close_lobby", lobby_num, signer=url_signer)
     check_lobby_url = URL("check_lobby", lobby_num, signer=url_signer)
+    like_chat_url = URL("like_chat")
 
     return dict(game_name=game_name, opponent=opp_name, get_chat_url=get_chat_url, add_chat_url=add_chat_url, lobby_num=lobby_num,
-                close_lobby_url=close_lobby_url, check_lobby_url=check_lobby_url)
+                close_lobby_url=close_lobby_url, check_lobby_url=check_lobby_url, like_chat_url=like_chat_url)
 
 @action("close_lobby/<lobby_num:int>")
 @action.uses(url_signer.verify())
@@ -206,3 +209,13 @@ def check_lobby(lobby_num):
     # RV: Lobby is fine
     return dict(message="OK")
 
+@action("like_chat/<chat_id:int>")
+def like_chat(chat_id):
+    chat = db(db.chat.id == chat_id).select().as_list()
+    if (len(chat) == 0):
+        # RV: Chat either doesn't exist or doesn't belong to the user
+        return dict(message="Failed")
+    # RV: Update likes counter
+    db.chat[chat_id] = dict(likes=(db.chat[chat_id].likes + 1))
+    return dict(message="OK")
+    

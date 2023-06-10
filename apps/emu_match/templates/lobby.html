@@ -29,36 +29,56 @@
   <h1 class="title">Lobby Chat</h1>
 
   <!-- MP: Show Chat -->
-  <div v-for="c in chat_list" class="box">
+  <div v-for="(c,index) in chat_list" class="box">
     <article class="media">
       <div class="media-content">
         <div class="content chat-bubble">
-          <p>
             <strong>{{c.email}}</strong> <small> {{c.time}}</small>
-            <br>
+            <br />
             {{c.chat}}
-          </p>
+
+            <div style="float: right !important">
+              <div v-if="c.counter !== undefined">
+                <span
+                  style="background-color: #eeae25"
+                  class="tag is-white"
+                  @click="increment(index)"
+                  ><i
+                    class="fa fa-thumbs-up fa-2x"
+                    style="background-color: #eeae25"
+                    aria-hidden="true"
+                  ></i
+                  >&nbsp;{{c.counter.likes}}</span
+                >
+              </div>
+            </div>
         </div>
       </div>
     </article>
   </div>
-  
+
   <!-- MP: Add Chat -->
   <div class="block">
     <div class="field">
       <p class="control has-icons-left">
-        <input class="input" type="text" v-model="new_chat" placeholder="Enter your message here"/>
+        <input
+          class="input"
+          type="text"
+          v-model="new_chat"
+          placeholder="Enter your message here"
+        />
         <span class="icon is-small is-left">
           <i class="fas fa-envelope"></i>
         </span>
       </p>
     </div>
-    <button class="button is-primary" @click="add_chat(new_chat)">Submit</button>
+    <button class="button is-primary" @click="add_chat(new_chat)">
+      Submit
+    </button>
   </div>
 
   <!-- RV: Leave Lobby -->
   <button class="button is-danger" @click="close_lobby()">Report Loss</button>
-
 </div>
 
 <!-- MP: Chat Urls and Script -->
@@ -68,6 +88,8 @@
   let get_chat_url = "[[=XML(get_chat_url)]]";
   let check_lobby_url = "[[=XML(check_lobby_url)]]";
   let close_lobby_url = "[[=XML(close_lobby_url)]]";
+  let like_chat_url = "[[=XML(like_chat_url)]]";
+  
 </script>
 <script src="js/chat.js"></script>
 [[end]]

@@ -24,39 +24,53 @@
   <h1 class="title">General Chat</h1>
 
   <!-- MP: Show Chat -->
-  <div v-for="(item,index) in chat_list" class="box" :key="item.id" >
-
+  <div v-for="(item,index) in chat_list" class="box" :key="item.id">
     <article class="media">
       <div class="media-content">
         <div class="content chat-bubble">
-          
-          
-            <strong class="left-align">{{item.email}}</strong> <small style="float: right !important;">{{item.time}}</small>
-            <br>
-            {{item.chat}}
-         
-              <div style="float: right !important;">
+          <strong class="left-align">{{item.email}}</strong>
+          <small style="float: right !important">{{item.time}}</small>
+          <br />
+          {{item.chat}}
 
-              
-               <span style="background-color: #eeae25" class="tag is-white" @click="increment(index)" ><i class="fa fa-thumbs-up fa-2x" style="background-color: #eeae25" aria-hidden="true"></i>&nbsp;{{item.counter.likes}}</span>
-               <span style="background-color: #eeae25" class="tag is-white" @click="decrement(index)" ><i class="fa fa-thumbs-down fa-2x" style="background-color: #eeae25" aria-hidden="true"></i>&nbsp;{{item.counter.dislikes}}</span>
-             
-              </div>
+          <div style="float: right !important">
+            <div v-if="item.counter !== undefined">
+              <span
+                style="background-color: #eeae25"
+                class="tag is-white"
+                @click="increment(index)"
+                ><i
+                  class="fa fa-thumbs-up fa-2x"
+                  style="background-color: #eeae25"
+                  aria-hidden="true"
+                ></i
+                >&nbsp;{{item.counter.likes}}</span
+              >
+            </div>
+          </div>
         </div>
+      </div>
     </article>
   </div>
-  
+
   <!-- MP: Add Chat -->
   <div class="block">
     <div class="field">
       <p class="control has-icons-left">
-        <input class="input" type="text" v-model="new_chat" placeholder="Enter your message here"/>
+        <input
+          class="input"
+          type="text"
+          v-model="new_chat"
+          placeholder="Enter your message here"
+        />
         <span class="icon is-small is-left">
           <i class="fas fa-envelope"></i>
         </span>
       </p>
     </div>
-    <button class="button is-primary" @click="add_chat(new_chat)">Submit</button>
+    <button class="button is-primary" @click="add_chat(new_chat)">
+      Submit
+    </button>
   </div>
 </div>
 
@@ -67,6 +81,7 @@
   let get_chat_url = "[[=XML(get_chat_url)]]";
   let check_lobby_url = undefined;
   let leave_lobby_url = undefined;
+  let like_chat_url = "[[=XML(like_chat_url)]]";
 </script>
 <script src="js/chat.js"></script>
 [[end]]
