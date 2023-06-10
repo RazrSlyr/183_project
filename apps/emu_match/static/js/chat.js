@@ -47,16 +47,6 @@ let init = (app) => {
         app.vue.chat_list.push(chat);
         app.vue.new_chat = "";
     }
-    //add reaction
-    app.add_react = function (chat) {
-        axios.post(add_chat_url, {
-            chat: chat,
-        }).then(function (response) {
-        });
-
-        app.vue.chat_list.push(chat);   // MP:  Add to chat list
-        app.vue.new_chat = "";          // MP:  Clear new chat
-    }
 
     app.increment = function (index) {
         const id = app.vue.chat_list[index].id;
