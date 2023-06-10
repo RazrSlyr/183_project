@@ -24,7 +24,7 @@ Xujun Xie|xxie36@ucsc.edu|EMU MATCH <br/>
 
 At any time, users can return to the main page by clicking on the logo situated in the top-left corner of the webpage.
 <br/>
-    ![Main_Page_Logo](https://drive.google.com/file/d/1f2hWGI_7zMaqv_LjuFY13_sI6bYNShAR/view?usp=drive_link)
+    ![Main_Page_Logo](./Image/Main%20Page%20Logo.png)
 <br/>
 
 ### Global Chat: 
@@ -32,7 +32,7 @@ At any time, users can return to the main page by clicking on the logo situated 
 
 Users have the ability to participate in a global chat and converse with other users in the same chat, irrespective of the game they are playing.
 <br/>
-    ![general_chat](https://drive.google.com/file/d/1HRMdfsjidunLZFGtVIvEirMWJ5JcqUZS/view?usp=drive_link)
+    ![general_chat](./Image/global_chat.png)
 <br/>
 
 ### Game Room: 
@@ -40,9 +40,9 @@ Users have the ability to participate in a global chat and converse with other u
 
 By clicking on the 'Game' button located at the top of the toolbar, or by simply clicking 'Let's Join the game' at the bottom of the page, users can access the game room.
 <br/>
-    ![game_room](https://drive.google.com/file/d/1wE78PTjnwArqEf7tH2fkENFSovOBLARs/view?usp=drive_link)
+    ![game_room](./Image/Game%20Room.png)
 <br/>
-    ![Let's_join_game](https://drive.google.com/file/d/1f2hWGI_7zMaqv_LjuFY13_sI6bYNShAR/view?usp=drive_link)
+    ![Let's_join_game](./Image/Let's%20join%20the%20game.png)
 <br/>
 
 ### Game Creation: 
@@ -50,7 +50,7 @@ By clicking on the 'Game' button located at the top of the toolbar, or by simply
 
 Within the game room, if users can't find the game they're looking for, they have the option to create their own game by simply clicking the 'Add game' button.
 <br/>
-    ![Add_Game](https://drive.google.com/file/d/1jeB4MzXITAXRYFEu946NNICa31km0EIH/view?usp=drive_link)
+    ![Add_Game](./Image/Add%20Game.png)
 <br/>
 
 ### Joining and Leaving Game Queue: 
@@ -58,17 +58,17 @@ Within the game room, if users can't find the game they're looking for, they hav
 
 Users can join the queue for a desired game by clicking the 'Join queue' button in the overview table.
 <br/>
-    ![Join_Queue](https://drive.google.com/file/d/1U-vr-972vl41k1sWOEkV2b3Ix2MTffut/view?usp=drive_link)
+    ![Join_Queue](./Image/Join%20Queue.png)
 <br/>
 
 OR by clicking the start button on the game.
 <br/>
-    ![Start_Button](https://drive.google.com/file/d/1rLykMwo297wfSG-OBjPa2VAQqTV-WWeC/view?usp=drive_link)
+    ![Start_Button](./Image/Start%20Button.png)
 <br/>
 
 Users also have the freedom to leave the queue at any time by clicking the 'Leave queue' button.
 <br/>
-    ![Leave_Queue](https://drive.google.com/file/d/15QlLstHnYHs1qC_DFnRc_PHsxPc_TRR3/view?usp=drive_link)
+    ![Leave_Queue](./Image/Leave%20Queue.png)
 <br/>
 
 ### Lobby Chat:
@@ -76,8 +76,7 @@ Users also have the freedom to leave the queue at any time by clicking the 'Leav
 
 After being paired with other users, they can interact with each other via the lobby chat. Users can also exit the lobby by hitting the 'Report Loss' button at the bottom of the lobby chat page.
 <br/>
-    ![Lobby_Chat](https://drive.google.com/file/d/1aL-MNovipKzBBGkqMisBTmeB20kTM8pU/view?usp=drive_link)
-<br/>
+    ![Lobby_Chat](./Image/Lobby%20Chat.png)
 Users can also exit the lobby by hitting the 'Report Loss' button at the bottom of the lobby chat page.
 <br/>
-    ![Leave_Chat](https://drive.google.com/file/d/1aL-MNovipKzBBGkqMisBTmeB20kTM8pU/view?usp=drive_link)
+    ![Leave_Chat](./Image/Leave%20Chat.png)
