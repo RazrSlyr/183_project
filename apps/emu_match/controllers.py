@@ -9,7 +9,7 @@ url_signer = URLSigner(session)
 
 
 @action("index")
-@action.uses("index.html", auth.user, T, url_signer)
+@action.uses("index.html", auth, url_signer)
 def index():    
     matchmake_url = URL("matchmaking", signer=url_signer)
     chat_url = URL("chat", signer=url_signer)
